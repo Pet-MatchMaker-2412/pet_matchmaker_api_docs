@@ -70,9 +70,47 @@ paths:
           content:
             application/json:
               schema:
+                $ref: "#/components/schemas/QuestionnaireSubmissions"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - questionnaire submissions
+      summary: Submit a user questionnaire
+      description: Submit a user questionnaire with their answer ids, get a recommended animal in return!
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitQuestionnaire"
+        required: true
+      responses:
+        "201":
+          description: Successful creation
+          content:
+            application/json:
+              schema:
                 $ref: "#/components/schemas/QuestionnaireSubmission"
         "404":
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "422":
+          description: Invalid or missing answer_ids
           content:
             application/json:
               schema:
@@ -175,6 +213,13 @@ components:
             text:
               type: string
               examples: [answer]
+    QuestionnaireSubmissions:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuestionnaireSubmission"
     QuestionnaireSubmission:
       type: object
       properties:
@@ -205,7 +250,22 @@ components:
               properties:
                 data:
                   type: object
-                  $ref: "#/components/schemas/RecommendedAnimal"
+                  properties:
+                    type:
+                      type: string
+                      examples: [recommended_animal]
+                    id:
+                      type: string
+                      examples: [1]
+                    attributes:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          examples: [dachshund]
+                        photo_url:
+                          type: string
+                          examples: [https://photos.com/dachshund]
     SubmissionAnswer:
       type: object
       properties:
@@ -300,6 +360,14 @@ components:
         zipcode:
           type: string
           examples: [07097]
+    SubmitQuestionnaire:
+      type: object
+      properties:
+        answer_ids:
+          type: array
+          items:
+            type: integer
+            examples: [[1, 4, 6]]
     Error:
       type: object
       properties:
