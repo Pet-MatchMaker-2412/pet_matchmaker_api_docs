@@ -13,6 +13,30 @@ tags:
   - name: petfinder animals
 paths:
   /users:
+    get:
+      tags:
+        - user
+      summary: Get a user
+      description: Search for a user by username
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUser"
+        required: true
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "422":
+          description: Non-existent user or missing username
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
     post:
       tags:
         - user
