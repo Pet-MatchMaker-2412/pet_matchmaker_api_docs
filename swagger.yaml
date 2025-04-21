@@ -188,16 +188,10 @@ components:
             text:
               type: string
               examples: [question?]
-        relationships:
-          type: object
-          properties:
             answers:
-              type: object
-              properties:
-                data:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Answer"
+              type: array
+              items:
+                $ref: "#/components/schemas/Answer"
     Answer:
       type: object
       properties:
@@ -233,39 +227,30 @@ components:
           type: object
           properties:
             recommended_pet_id:
-              type: integer
+              type: string
               examples: [1]
-        relationships:
-          type: object
-          properties:
             submission_answers:
-              type: object
-              properties:
-                data:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/SubmissionAnswer"
+              type: array
+              items:
+                $ref: "#/components/schemas/SubmissionAnswer"
             recommended_animal:
               type: object
               properties:
-                data:
+                type:
+                  type: string
+                  examples: [recommended_animal]
+                id:
+                  type: string
+                  examples: [1]
+                attributes:
                   type: object
                   properties:
                     type:
                       type: string
-                      examples: [recommended_animal]
-                    id:
+                      examples: [dachshund]
+                    photo_url:
                       type: string
-                      examples: [1]
-                    attributes:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                          examples: [dachshund]
-                        photo_url:
-                          type: string
-                          examples: [https://photos.com/dachshund]
+                      examples: [https://photos.com/dachshund]
     SubmissionAnswer:
       type: object
       properties:
@@ -279,7 +264,7 @@ components:
           type: object
           properties:
             answer_id:
-              type: integer
+              type: string
               examples: [1]
     RecommendedAnimal:
       type: object
@@ -355,7 +340,7 @@ components:
       type: object
       properties:
         recommended_animal_id:
-          type: integer
+          type: string
           examples: [1]
         zipcode:
           type: string
@@ -366,7 +351,7 @@ components:
         answer_ids:
           type: array
           items:
-            type: integer
+            type: string
             examples: [[1, 4, 6]]
     Error:
       type: object
