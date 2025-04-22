@@ -284,9 +284,9 @@ components:
         attributes:
           type: object
           properties:
-            answer_id:
+            text:
               type: string
-              examples: [1]
+              examples: [answer]
     RecommendedAnimal:
       type: object
       properties:
