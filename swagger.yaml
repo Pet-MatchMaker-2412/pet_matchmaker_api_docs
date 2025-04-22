@@ -250,7 +250,7 @@ components:
         attributes:
           type: object
           properties:
-            recommended_pet_id:
+            recommended_animal_id:
               type: string
               examples: [1]
             submission_answers:
