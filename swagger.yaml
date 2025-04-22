@@ -250,9 +250,6 @@ components:
         attributes:
           type: object
           properties:
-            recommended_animal_id:
-              type: string
-              examples: [1]
             submission_answers:
               type: array
               items:
