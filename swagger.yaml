@@ -302,7 +302,7 @@ components:
         attributes:
           type: object
           properties:
-            type:
+            animal_type:
               type: string
               examples: [dachshund]
             photo_url:
