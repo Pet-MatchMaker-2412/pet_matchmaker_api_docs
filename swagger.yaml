@@ -74,7 +74,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Questions"
-  /users/{id}/questionnaire_submissions:
+  /users/{user_id}/questionnaire_submissions:
     get:
       tags:
         - questionnaire submissions
@@ -82,7 +82,7 @@ paths:
       description: Fetch all questionnaire submissions for a given user
       parameters:
         - in: path
-          name: id
+          name: user_id
           required: true
           schema:
             type: integer
@@ -108,7 +108,7 @@ paths:
       description: Submit a user questionnaire with their answer ids, get a recommended animal in return!
       parameters:
         - in: path
-          name: id
+          name: user_id
           required: true
           schema:
             type: integer
@@ -129,6 +129,52 @@ paths:
                 $ref: "#/components/schemas/QuestionnaireSubmission"
         "404":
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "422":
+          description: Invalid or missing answer_ids
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/{user_id}/questionnaire_submissions/{id}:
+    patch:
+      tags:
+        - questionnaire submissions
+      summary: Save a questionnaire submission
+      description: Save a questionnaire submission for a given user
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user ID
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The questionnaire submission ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveQuestionnaire"
+        required: true
+      responses:
+        "200":
+          description: Successful save
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionnaireSubmission"
+        "404":
+          description: User or Questionnaire Submission not found
           content:
             application/json:
               schema:
@@ -250,6 +296,9 @@ components:
         attributes:
           type: object
           properties:
+            saved:
+              type: boolean
+              examples: [true, false]
             submission_answers:
               type: array
               items:
@@ -374,6 +423,12 @@ components:
           items:
             type: string
             examples: [[1, 4, 6]]
+    SaveQuestionnaire:
+      type: object
+      properties:
+        saved:
+          type: boolean
+          examples: [true]
     Error:
       type: object
       properties:
