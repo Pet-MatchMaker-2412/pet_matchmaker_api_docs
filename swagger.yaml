@@ -321,6 +321,9 @@ components:
                     photo_url:
                       type: string
                       examples: [https://photos.com/dachshund]
+                    description:
+                      type: string
+                      examples: [description]
     SubmissionAnswer:
       type: object
       properties:
@@ -354,6 +357,9 @@ components:
             photo_url:
               type: string
               examples: [https://photos.com/dachshund]
+            description:
+              type: string
+              examples: [description]
     PetfinderAnimals:
       type: object
       properties:
