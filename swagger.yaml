@@ -18,12 +18,14 @@ paths:
         - user
       summary: Get a user
       description: Search for a user by username
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateUser"
-        required: true
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+            examples: [something_unique]
+          required: true
+          description: The username to login
       responses:
         "200":
           description: Successful request
