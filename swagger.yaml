@@ -5,7 +5,7 @@ info:
     Pet Matchmaker Backend API
   version: 1.0.0
 servers:
-  - url: https://pet-matchmaker-api-da76dbdc99ce.herokuapp.com:3000/api/v1
+  - url: https://pet-matchmaker-api-da76dbdc99ce.herokuapp.com:7964/api/v1
 tags:
   - name: user
   - name: questions
