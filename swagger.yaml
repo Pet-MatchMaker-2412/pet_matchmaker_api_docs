@@ -193,12 +193,21 @@ paths:
         - petfinder animals
       summary: Fetch animals from Petfinder API
       description: Fetch specific animals from the Petfinder API near the user's zipcode
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PetfinderReq"
-        required: true
+      parameters:
+        - in: query
+          name: zipcode
+          schema:
+            type: string
+            examples: [07097]
+          required: true
+          description: The user's zipcode to login
+        - in: query
+          name: recommended_animal_id
+          schema:
+            type: string
+            examples: [1]
+          required: true
+          description: The recommended animal id
       responses:
         "200":
           description: Successful request
@@ -414,15 +423,6 @@ components:
             email:
               type: string
               examples: [petfindertechsupport@gmail.com]
-    PetfinderReq:
-      type: object
-      properties:
-        recommended_animal_id:
-          type: string
-          examples: [1]
-        zipcode:
-          type: string
-          examples: [07097]
     SubmitQuestionnaire:
       type: object
       properties:
